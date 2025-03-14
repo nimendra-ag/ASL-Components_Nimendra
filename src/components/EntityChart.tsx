@@ -10,43 +10,35 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-const inputData = [
-  { entity: "CS", count: 187 },
-  { entity: "CC", count: 200 },
-  { entity: "CN", count: 275 },
-  { entity: "Kandy", count: 173 },
-  { entity: "SLIIT", count: 190 },
-  { entity: "NIBM", count: 90 },
-  { entity: "NSBM", count: 70 },
-  { entity: "Rajarata", count: 70 },
-  { entity: "Ruhuna", count: 90 },
-  { entity: "USJ", count: 80 },
-];
-const colors = [
-  "hsl(210, 100%, 36%)",
-  "hsl(120, 100%, 36%)",
-  "hsl(60, 100%, 36%)",
-  "hsl(30, 100%, 36%)",
-  "hsl(0, 100%, 36%)",
-  "hsl(300, 100%, 36%)",
-  "hsl(270, 100%, 36%)",
-  "hsl(240, 100%, 36%)",
-  "hsl(180, 100%, 36%)",
-  "hsl(150, 100%, 36%)",
-];
-const chartData = inputData.map((data, index) => ({
-  ...data,
-  fill: colors[index],
-}));
 const chartConfig = {
   count: {
     label: "count",
   },
 } satisfies ChartConfig;
 
-export function EntityChart() {
+export function EntityChart({
+  inputData,
+}: {
+  inputData: { entity: string; count: number }[];
+}) {
+  const colors = [
+    "hsl(210, 100%, 36%)",
+    "hsl(120, 100%, 36%)",
+    "hsl(60, 100%, 36%)",
+    "hsl(30, 100%, 36%)",
+    "hsl(0, 100%, 36%)",
+    "hsl(300, 100%, 36%)",
+    "hsl(270, 100%, 36%)",
+    "hsl(240, 100%, 36%)",
+    "hsl(180, 100%, 36%)",
+    "hsl(150, 100%, 36%)",
+  ];
+  const chartData = inputData.map((data, index) => ({
+    ...data,
+    fill: colors[index],
+  }));
   return (
-    <Card>
+    <Card className="h-[500px]">
       <CardHeader>
         <CardTitle>Applications By Selected Project</CardTitle>
       </CardHeader>

@@ -10,13 +10,21 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function Navbar({ product, setProduct }) {
+export default function Navbar({
+  product,
+  setProduct,
+}: {
+  product: string;
+  setProduct: (value: string) => void;
+}) {
   // Define a callback function for handling product changes
   const handleProductChange = useCallback(
-    (value) => {
-      setProduct(value); // Update the product state in the parent component
+    (value: string) => {
+      setProduct(value);
+      console.log("Value set in Navbar:", value);
+      console.log("Product in Navbar:", product);
     },
-    [setProduct]
+    [product, setProduct]
   ); // useCallback with dependency array ensures the function instance is stable
 
   return (
@@ -25,11 +33,11 @@ export default function Navbar({ product, setProduct }) {
       style={{ backgroundColor: "" }}
     >
       {/* Left: Product Selection Dropdown */}
-      <Select onValueChange={handleProductChange} value={product}>
+      <Select onValueChange={(e) => handleProductChange(e)} value={product}>
         <SelectTrigger className="w-[220px] bg-white">
           <SelectValue placeholder="Select Product" />
         </SelectTrigger>
-        <SelectContent className="bg-white">
+        <SelectContent className="bg-white text-black">
           <SelectItem value="volunteer" className="bg-white">
             <Globe className="mr-2 h-4 w-4" />
             Global Volunteer

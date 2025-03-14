@@ -1,6 +1,6 @@
 "use client";
 
-import { Pie, PieChart } from "recharts";
+import { Pie, PieChart, Cell } from "recharts";
 
 import {
   Card,
@@ -15,12 +15,22 @@ import {
   ChartLegend,
   ChartLegendContent,
 } from "@/components/ui/chart";
+
 const chartData = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-  { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
-  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-  { browser: "other", visitors: 90, fill: "var(--color-other)" },
+  { browser: "chrome", visitors: 275 },
+  { browser: "safari", visitors: 200 },
+  { browser: "firefox", visitors: 187 },
+  { browser: "edge", visitors: 173 },
+  { browser: "other", visitors: 90 },
+];
+
+// Define your desired color palette
+const chartColors = [
+  "hsl(var(--chart-1))", // Chrome - existing color
+  "hsl(var(--chart-2))", // Safari - existing color
+  "hsl(var(--chart-3))", // Firefox - existing color
+  "hsl(var(--chart-4))", // Edge - existing color
+  "hsl(var(--chart-5))", // Other - existing color
 ];
 
 const chartConfig = {
@@ -64,8 +74,14 @@ export default function Component() {
           <PieChart width={800} height={400}>
             {" "}
             {/* Explicitly setting width & height */}
-            <Pie data={chartData} dataKey="visitors" outerRadius={150} />{" "}
-            {/* Adjusted radius */}
+            <Pie data={chartData} dataKey="visitors" outerRadius={150}>
+              {chartData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={chartColors[index % chartColors.length]}
+                />
+              ))}
+            </Pie>
             <ChartLegend
               content={<ChartLegendContent nameKey="browser" />}
               className="-translate-y-2 flex-wrap gap-2 [&>]:basis-1/4 [&>]:justify-center"

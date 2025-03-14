@@ -9,38 +9,6 @@ import {
   ChartTooltip,
 } from "@/components/ui/chart";
 
-const chartData = [
-  { mc: "Egypt", count: 186 },
-  { mc: "India", count: 305 },
-  { mc: "Nederlands", count: 237 },
-  { mc: "Pakistan", count: 73 },
-  { mc: "Turkey", count: 209 },
-  { mc: "Cambodia", count: 214 },
-  { mc: "Brazil", count: 192 },
-  { mc: "China", count: 321 },
-  { mc: "Germany", count: 178 },
-  { mc: "Japan", count: 256 },
-  { mc: "USA", count: 400 },
-  { mc: "Canada", count: 150 },
-  { mc: "Australia", count: 220 },
-  { mc: "Russia", count: 310 },
-  { mc: "France", count: 190 },
-  { mc: "Italy", count: 230 },
-  { mc: "Spain", count: 210 },
-  { mc: "South Korea", count: 280 },
-  { mc: "Mexico", count: 170 },
-  { mc: "Argentina", count: 140 },
-  { mc: "South Africa", count: 200 },
-  { mc: "Nigeria", count: 130 },
-  { mc: "Kenya", count: 120 },
-  { mc: "Indonesia", count: 260 },
-  { mc: "Malaysia", count: 240 },
-  { mc: "Thailand", count: 270 },
-  { mc: "Vietnam", count: 250 },
-  { mc: "Philippines", count: 180 },
-  { mc: "Bangladesh", count: 160 },
-];
-
 const chartConfig = {
   count: {
     label: "count",
@@ -73,9 +41,13 @@ const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
   return null;
 };
 
-export function McChart() {
+export function McChart({
+  chartData,
+}: {
+  chartData: { mc: string; count: number }[];
+}) {
   return (
-    <Card>
+    <Card className="h-[500px]">
       <CardHeader>
         <CardTitle>MC Breakdown by selected Project</CardTitle>
       </CardHeader>

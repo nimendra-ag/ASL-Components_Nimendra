@@ -14,10 +14,28 @@ import { CalendarIcon } from "lucide-react";
 import { DateRange } from "react-day-picker";
 import { DatePickerWithRange } from "./DatePickerWithRange";
 
-export default function DashboardFilters() {
+export default function DashboardFilters({ product }: { product: string }) {
   const [dateRange, setDateRange] = React.useState<DateRange | undefined>(
     undefined
   );
+
+  const t_products = ["oGTa", "iGTa", "oGTe", "iGTe"];
+  const v_products = ["oGV", "iGV"];
+
+  const t_projects = [
+    "Information Technology",
+    "Engineering",
+    "Business Developement",
+    "Marketing",
+    "Teaching",
+    "Other",
+  ];
+  const v_projects = [
+    "Volunteering Project1",
+    "Volunteering Project2",
+    "Volunteering Project3",
+    "Volunteering Project4",
+  ];
 
   return (
     <div className="bg-white p-4 rounded-lg shadow-md flex gap-4 items-center justify-between">
@@ -38,9 +56,19 @@ export default function DashboardFilters() {
           <SelectValue placeholder="Functions" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">All </SelectItem>
-          <SelectItem value="product1">Product 1</SelectItem>
-          <SelectItem value="product2">Product 2</SelectItem>
+          {product === "volunteer"
+            ? v_products.map((product) => (
+                <SelectItem key={product} value={product}>
+                  {product}
+                </SelectItem>
+              ))
+            : product === "talent/teacher"
+            ? t_products.map((product) => (
+                <SelectItem key={product} value={product}>
+                  {product}
+                </SelectItem>
+              ))
+            : null}
         </SelectContent>
       </Select>
 
@@ -60,9 +88,19 @@ export default function DashboardFilters() {
           <SelectValue placeholder="Project" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">All Projects</SelectItem>
-          <SelectItem value="project1">Project 1</SelectItem>
-          <SelectItem value="project2">Project 2</SelectItem>
+          {product === "volunteer"
+            ? v_projects.map((project) => (
+                <SelectItem key={project} value={project}>
+                  {project}
+                </SelectItem>
+              ))
+            : product === "talent/teacher"
+            ? t_projects.map((project) => (
+                <SelectItem key={project} value={project}>
+                  {project}
+                </SelectItem>
+              ))
+            : null}
         </SelectContent>
       </Select>
 
@@ -86,15 +124,18 @@ export default function DashboardFilters() {
         </SelectContent>
       </Select>
 
-      <Select>
-        <SelectTrigger className="w-32">
-          <SelectValue placeholder="Duration" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="short">Short</SelectItem>
-          <SelectItem value="long">Long</SelectItem>
-        </SelectContent>
-      </Select>
+      {/* Hide Duration filter when Global Volunteer is selected */}
+      {product !== "volunteer" && (
+        <Select>
+          <SelectTrigger className="w-32">
+            <SelectValue placeholder="Duration" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="short">Short</SelectItem>
+            <SelectItem value="long">Long</SelectItem>
+          </SelectContent>
+        </Select>
+      )}
     </div>
   );
 }
