@@ -18,6 +18,9 @@ export default function DashboardFilters({ product }: { product: string }) {
   const [dateRange, setDateRange] = React.useState<DateRange | undefined>(
     undefined
   );
+  const [selectedFunction, setSelectedFunction] = React.useState<string | null>(
+    null
+  );
 
   const t_products = ["oGTa", "iGTa", "oGTe", "iGTe"];
   const v_products = ["oGV", "iGV"];
@@ -37,11 +40,30 @@ export default function DashboardFilters({ product }: { product: string }) {
     "Volunteering Project4",
   ];
 
+  const handleFunctionSelect = (value: string) => {
+    setSelectedFunction(value);
+  };
+
+  const showProjectFilter = !(
+    selectedFunction === "iGTe" || selectedFunction === "oGTe"
+  );
+
+  const isInternal =
+    selectedFunction === "iGV" ||
+    selectedFunction === "iGTa" ||
+    selectedFunction === "iGTe";
+
+  const isTalentTeacher = product === "talent/teacher";
+
+  const mcLabel = isInternal ? "Home MC" : "Host MC";
+  const lcLabel = isInternal ? "Home LC" : "Host LC";
+  const projectLabel = isTalentTeacher ? "Workfield" : "Project";
+
   return (
     <div className="bg-white p-4 rounded-lg shadow-md flex gap-4 items-center justify-between">
       <Select>
         <SelectTrigger className="w-48">
-          <SelectValue placeholder="AIESEC SRI LANKA" />
+          <SelectValue placeholder="Local Entity" />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="sri_lanka">AIESEC Sri Lanka</SelectItem>
@@ -51,7 +73,7 @@ export default function DashboardFilters({ product }: { product: string }) {
 
       <DatePickerWithRange value={dateRange} onChange={setDateRange} />
 
-      <Select>
+      <Select onValueChange={handleFunctionSelect}>
         <SelectTrigger className="w-32">
           <SelectValue placeholder="Functions" />
         </SelectTrigger>
@@ -83,30 +105,32 @@ export default function DashboardFilters({ product }: { product: string }) {
         </SelectContent>
       </Select>
 
-      <Select>
-        <SelectTrigger className="w-32">
-          <SelectValue placeholder="Project" />
-        </SelectTrigger>
-        <SelectContent>
-          {product === "volunteer"
-            ? v_projects.map((project) => (
-                <SelectItem key={project} value={project}>
-                  {project}
-                </SelectItem>
-              ))
-            : product === "talent/teacher"
-            ? t_projects.map((project) => (
-                <SelectItem key={project} value={project}>
-                  {project}
-                </SelectItem>
-              ))
-            : null}
-        </SelectContent>
-      </Select>
+      {showProjectFilter && (
+        <Select>
+          <SelectTrigger className="w-32">
+            <SelectValue placeholder={projectLabel} />
+          </SelectTrigger>
+          <SelectContent>
+            {product === "volunteer"
+              ? v_projects.map((project) => (
+                  <SelectItem key={project} value={project}>
+                    {project}
+                  </SelectItem>
+                ))
+              : product === "talent/teacher"
+              ? t_projects.map((project) => (
+                  <SelectItem key={project} value={project}>
+                    {project}
+                  </SelectItem>
+                ))
+              : null}
+          </SelectContent>
+        </Select>
+      )}
 
       <Select>
         <SelectTrigger className="w-32">
-          <SelectValue placeholder="Home MC" />
+          <SelectValue placeholder={mcLabel} />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="mc1">MC 1</SelectItem>
@@ -116,7 +140,7 @@ export default function DashboardFilters({ product }: { product: string }) {
 
       <Select>
         <SelectTrigger className="w-32">
-          <SelectValue placeholder="Home LC" />
+          <SelectValue placeholder={lcLabel} />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="lc1">LC 1</SelectItem>
