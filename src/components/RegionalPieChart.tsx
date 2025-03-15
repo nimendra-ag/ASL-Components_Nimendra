@@ -17,36 +17,32 @@ import {
   ChartLegendContent,
 } from "@/components/ui/chart"
 const chartData = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-  { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
-  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-  { browser: "other", visitors: 90, fill: "var(--color-other)" },
+  { browser: "Europe", visitors: 275, fill: "#E7AFFF" },
+  { browser: "MEA", visitors: 200, fill: "#0D2535" },
+  { browser: "AsiaPacific", visitors: 187, fill: "#54317B" },
+  { browser: "Americas", visitors: 173, fill: "#8B5695" },
 ]
 const chartConfig = {
   visitors: {
     label: "Visitors",
   },
-  chrome: {
-    label: "Chrome",
-    color: "#343a40",
+  Europe: {
+    label: "Europe",
+    color: "#E7AFFF",
   },
-  safari: {
-    label: "Safari",
-    color: "#007bff",
+  MEA: {
+    label: "MEA",
+    color: "#0D2535",
   },
-  firefox: {
-    label: "Firefox",
-    color: "#28a745",
+  AsiaPacific: {
+    label: "Asia Pacific",
+    color: "#54317B",
   },
-  edge: {
-    label: "Edge",
-    color: "#dc3545",
+  Americas: {
+    label: "Americas",
+    color: "#8B5695",
   },
-  other: {
-    label: "Other",
-    color: "#ffc107",
-  },
+
 } satisfies ChartConfig
 
 

@@ -13,6 +13,7 @@ import FunnelChart from "@/components/FunnelChart";
 import Navbar from "@/components/Navbar";
 import DashboardFooter from "@/components/DashboardFooter";
 import { useCallback, useState } from "react";
+import { RegionalPieChart } from "@/components/RegionalPieChart";
 
 export default function Home() {
   // Sample data for FunnelChart
@@ -131,7 +132,7 @@ export default function Home() {
           <EntityRanking />
         </div>
         <div className="flex flex-col p-4 rounded-lg h-full">
-          <PieChart />
+          <RegionalPieChart />
         </div>
         <div className="flex flex-col p-4 rounded-lg h-full">
           <EntityChart inputData={entityChartData} />
